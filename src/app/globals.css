@@ -1,0 +1,43 @@
+@import "tailwindcss";
+
+ :root {
+  --bg: #f7f7f5;
+  --card: rgba(255,255,255,.78);
+  --text: #171717;
+  --muted: #777;
+  --line: rgba(0,0,0,.08);
+  --accent: #111;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", Inter, ui-sans-serif, system-ui, sans-serif; }
+button, input, textarea, select { font: inherit; }
+button { cursor: pointer; }
+::selection { background: #deded9; }
+.flow-card { background: var(--card); border: 1px solid var(--line); box-shadow: 0 18px 50px rgba(0,0,0,.035); backdrop-filter: blur(16px); }
+.flow-btn { border: 1px solid var(--line); background: rgba(255,255,255,.76); border-radius: 14px; padding: 10px 14px; transition: transform .18s ease, box-shadow .18s ease; }
+.flow-btn:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(0,0,0,.06); }
+.flow-input { width: 100%; border: 1px solid var(--line); background: rgba(255,255,255,.85); border-radius: 14px; padding: 12px 14px; outline: none; }
+.flow-input:focus { border-color: rgba(0,0,0,.24); box-shadow: 0 0 0 4px rgba(0,0,0,.04); }
+.page-shell { min-height: 100vh; padding: 28px; }
+@media (min-width: 900px) { .page-shell { padding: 40px 56px; } }
+
+.flow-brand { font-size: 1.25rem; font-weight: 650; letter-spacing: -0.05em; }
+.flow-brand span { color: rgba(0,0,0,.3); }
+.flow-nav { display:flex; align-items:center; justify-content:space-between; }
+.eyebrow { font-size: 10px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: rgba(0,0,0,.34); }
+.hero-title { margin-top: 18px; font-size: clamp(3.5rem, 8vw, 6.9rem); line-height: .94; letter-spacing: -.07em; font-weight: 650; max-width: 780px; }
+.hero-copy { margin-top: 26px; max-width: 650px; color: rgba(0,0,0,.48); font-size: 1.08rem; line-height: 1.85; }
+.soft-pill { display:inline-flex; align-items:center; border:1px solid rgba(0,0,0,.07); border-radius:999px; background:rgba(255,255,255,.58); padding:7px 10px; }
+.kbd { display:inline-flex; align-items:center; justify-content:center; border:1px solid rgba(0,0,0,.09); border-bottom-color:rgba(0,0,0,.16); border-radius:8px; background:rgba(255,255,255,.8); padding:4px 7px; font-size:11px; color:rgba(0,0,0,.4); box-shadow:0 1px 0 rgba(0,0,0,.05); }
+.hero-preview { border:1px solid rgba(0,0,0,.075); background:rgba(255,255,255,.7); border-radius:32px; box-shadow:0 35px 100px rgba(0,0,0,.08); backdrop-filter:blur(18px); overflow:hidden; transform:rotate(.4deg); }
+.hero-preview-bar { display:flex; gap:6px; align-items:center; border-bottom:1px solid rgba(0,0,0,.06); padding:12px 14px; background:rgba(255,255,255,.55); }
+.hero-preview-bar > span { width:7px; height:7px; border-radius:999px; background:rgba(0,0,0,.12); }
+.preview-card { min-height:140px; border:1px solid rgba(0,0,0,.07); background:rgba(255,255,255,.78); border-radius:22px; padding:18px; }
+.feature-card { border:1px solid rgba(0,0,0,.07); background:rgba(255,255,255,.62); border-radius:24px; padding:21px; min-height:160px; }
+
+.journal-editor:empty::before { content: attr(data-placeholder); color: rgba(0,0,0,.25); pointer-events: none; }
+.journal-editor h2 { margin: 1.5rem 0 .75rem; font-size: 2rem; line-height: 1.15; font-weight: 650; letter-spacing: -.04em; }
+.journal-editor h3 { margin: 1.25rem 0 .55rem; font-size: 1.35rem; line-height: 1.25; font-weight: 600; }
+.journal-editor p { margin: .4rem 0; }
+.journal-toolbar input[type="color"] { width: 18px; height: 18px; border: 0; padding: 0; background: transparent; }

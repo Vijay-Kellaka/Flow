@@ -1,0 +1,3 @@
+import { NextResponse } from "next/server";
+import { prisma } from "@/lib/prisma";
+export async function POST(req:Request){ const {email,token}=await req.json() as {email:string;token:string}; const row=await prisma.verificationToken.findUnique({where:{token}}); if(!row||row.identifier!==email.toLowerCase()||row.expires<new Date()) return NextResponse.json({error:"Invalid or expired verification link."},{status:400}); await prisma.user.update({where:{email:email.toLowerCase()},data:{emailVerified:new Date()}}); await prisma.verificationToken.delete({where:{token}}); return NextResponse.json({ok:true}); }
