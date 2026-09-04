@@ -1,6 +1,13 @@
 import { signIn } from "@/lib/auth";
+import { AuthError } from "next-auth";
+import { redirect } from "next/navigation";
 
-export default function LoginPage() {
+export default async function LoginPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ error?: string }>;
+}) {
+  const { error } = await searchParams;
   const googleEnabled = Boolean(
     process.env.AUTH_GOOGLE_ID && process.env.AUTH_GOOGLE_SECRET
   );
@@ -51,11 +58,20 @@ export default function LoginPage() {
             action={async (formData) => {
               "use server";
 
-              await signIn("credentials", {
-                email: formData.get("email"),
-                password: formData.get("password"),
-                redirectTo: "/dashboard",
-              });
+              try {
+                await signIn("credentials", {
+                  email: formData.get("email"),
+                  password: formData.get("password"),
+                  redirectTo: "/dashboard",
+                });
+              } catch (err) {
+                if (err instanceof AuthError) {
+                  redirect("/login?error=invalid");
+                }
+                // Not an auth error (e.g. it's the redirect Auth.js throws on
+                // success) — let it propagate so navigation still happens.
+                throw err;
+              }
             }}
             className="space-y-3"
           >
@@ -82,6 +98,12 @@ export default function LoginPage() {
               Sign in with email
             </button>
           </form>
+
+          {error && (
+            <p className="mt-4 text-center text-sm text-red-500">
+              Incorrect email or password. Please try again.
+            </p>
+          )}
 
           <p className="mt-5 text-center text-xs leading-5 text-black/40">
             Use your Flow account email and password to sign in.
