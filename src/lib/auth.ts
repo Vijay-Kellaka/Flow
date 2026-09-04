@@ -16,7 +16,7 @@ const providers = [
       const password = String(credentials?.password ?? "");
       if (!email || !password) return null;
       const user = await prisma.user.findUnique({ where: { email } });
-      if (!user?.passwordHash || !user.emailVerified) return null;
+      if (!user?.passwordHash) return null;
       const ok = await bcrypt.compare(password, user.passwordHash);
       return ok ? { id: user.id, email: user.email, name: user.name, image: user.image } : null;
     },
